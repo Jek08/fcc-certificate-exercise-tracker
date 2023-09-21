@@ -11,17 +11,18 @@ function createExercise(uid, description, duration, date) {
     console.log("Failed open db: ", e);
   }
 
+  if (date === "") {
+    date = new Date().toJSON().substring(0, 10);
+  }
+  
   const data = JSON.parse(db);
   data.users = data.users.map((user) => {
-    if (user._id != uid) {
-      return user;
-    }
-    if (user.hasOwnProperty("logs")) {
+    if (parseInt(user._id) === uid && user.hasOwnProperty("logs")) {
       let exerciseLog = [...user.logs];
       let newExercise = {
         description,
         duration,
-        date,
+        date: new Date(date).toDateString(),
       };
       exerciseLog.push(newExercise);
       user.logs = exerciseLog;
@@ -31,7 +32,7 @@ function createExercise(uid, description, duration, date) {
       user.logs.push({
         description,
         duration,
-        date,
+        date: new Date(date).toDateString(),
       });
       user.count = 1;
     }
@@ -45,7 +46,9 @@ function createExercise(uid, description, duration, date) {
     console.log("Failed write user update to db");
   }
   // return saved user with new exercise entry
-  return data.users.find((user) => parseInt(user._id) === uid);
+  return data.users.find((user) => {
+    return parseInt(user._id) === uid;
+  });
 }
 
 module.exports = createExercise;

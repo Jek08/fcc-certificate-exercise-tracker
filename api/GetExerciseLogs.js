@@ -36,7 +36,7 @@ function getExerciseLogs(id, from, to) {
   userExerciseLogs = userExerciseLogs.map((log) => ({
     description: log.description,
     duration: parseInt(log.duration),
-    date: new Date(log.date).toDateString(),
+    date: new Date(log.date),
   }));
 
   return {
