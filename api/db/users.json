@@ -1,0 +1,1 @@
+{"users":[{"_id":"0","username":"jaka","logs":[{"description":"Workout","duration":"20","date":"2023-09-20"},{"description":"abcd","duration":"10","date":"2023-09-22"}],"count":2},{"_id":"1","username":"john","logs":[{"description":"desc1","duration":"10","date":"2023-09-22"},{"description":"desc2","duration":"20","date":"2023-09-23"}],"count":2}]}
