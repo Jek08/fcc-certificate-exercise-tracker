@@ -16,7 +16,6 @@ function getUsers() {
     _id: user._id,
     username: user.username,
   }));
-  console.log(users);
 
   return users;
 }

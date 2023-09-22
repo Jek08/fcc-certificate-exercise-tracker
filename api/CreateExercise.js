@@ -11,7 +11,7 @@ function createExercise(uid, description, duration, date) {
     console.log("Failed open db: ", e);
   }
 
-  if (date === "") {
+  if (date == null) {
     date = new Date().toJSON().substring(0, 10);
   }
   
@@ -51,4 +51,17 @@ function createExercise(uid, description, duration, date) {
   });
 }
 
-module.exports = createExercise;
+function getUserExercise(uid) {
+  let db;
+  try {
+    db = fs.readFileSync(dbPath, { encoding: "utf-8" });
+  } catch (e) {
+    console.log("Failed open db: ", e);
+  }
+
+  const data = JSON.parse(db);
+  const user = data.users.filter((user) => user._id === uid);
+  return user;
+}
+
+module.exports = { createExercise, getUserExercise };
